@@ -1,0 +1,39 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(chmod +x:*)",
+      "Bash(gh gist:*)",
+      "Bash(ls:*)",
+      "Bash(openssl x509:*)",
+      "Bash(bash:*)",
+      "Bash(~/.local/bin/wt-switch test-wt:*)",
+      "Bash(lsof +D:*)",
+      "Bash(docker exec:*)",
+      "WebSearch",
+      "Read(//Applications/**)",
+      "Bash(mdfind \"kMDItemCFBundleIdentifier == ''dev.zed.Zed''\")",
+      "Bash(fzf --height=90%)",
+      "Bash(echo \"exit: $?\")",
+      "WebFetch(domain:gist.github.com)",
+      "Bash(curl -s https://api.github.com/gists/288ccea0da27da0138618ba9089c8d7f)",
+      "Bash(python3 -c \"import sys,json; g=json.load\\(sys.stdin\\); [print\\(f'=== {k} ===\\\\n{v[\\\\\"content\\\\\"]}'\\) for k,v in g['files'].items\\(\\)]\")",
+      "Bash(claude mcp *)",
+      "Bash(uvx --version)",
+      "Bash(mdfind -name \"Blender.app\")",
+      "Read(//private/tmp/**)",
+      "Bash(curl -sL -o addon.py https://raw.githubusercontent.com/ahujasid/blender-mcp/main/addon.py)",
+      "WebFetch(domain:www.top3d.ai)",
+      "WebFetch(domain:www.blender.org)",
+      "mcp__Blender__get_blendfile_summary_path_info",
+      "mcp__Blender__execute_blender_code",
+      "mcp__Blender__render_thumbnail_to_path",
+      "mcp__Blender__get_blendfile_summary_datablocks",
+      "mcp__Blender__get_objects_summary",
+      "mcp__Blender__render_viewport_to_path",
+      "mcp__Blender__get_screenshot_of_window_as_image",
+      "mcp__Blender__get_screenshot_of_window_as_json",
+      "mcp__Blender__get_screenshot_of_area_as_image",
+      "mcp__Blender__get_object_detail_summary"
+    ]
+  }
+}

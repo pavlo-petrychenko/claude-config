@@ -1,0 +1,69 @@
+{
+  "archflow": {
+    "type": "stdio",
+    "command": "node",
+    "args": [
+      "/Users/pavlopetricenko/Documents/archflow-mcp/dist/index.js"
+    ],
+    "env": {
+      "ARCHFLOW_API_KEY": "${ARCHFLOW_API_KEY}"
+    }
+  },
+  "figma-cached": {
+    "type": "stdio",
+    "command": "node",
+    "args": [
+      "/Users/pavlopetricenko/Documents/figma-cached-mcp/dist/index.js"
+    ],
+    "env": {
+      "FIGMA_API_TOKEN": "${FIGMA_API_TOKEN}"
+    }
+  },
+  "figma-mcp-go": {
+    "type": "stdio",
+    "command": "npx",
+    "args": [
+      "-y",
+      "@vkhanhqui/figma-mcp-go@latest"
+    ],
+    "env": {}
+  },
+  "obsidian-personal": {
+    "type": "stdio",
+    "command": "npx",
+    "args": [
+      "@bitbonsai/mcpvault@latest",
+      "/Users/pavlopetricenko/Documents/Personal Vault"
+    ]
+  },
+  "excalidash": {
+    "type": "stdio",
+    "command": "node",
+    "args": [
+      "/Users/pavlopetricenko/Documents/personal/excalidash/mcp-server/dist/index.js"
+    ],
+    "env": {
+      "EXCALIDASH_API_KEY": "${EXCALIDASH_API_KEY}",
+      "EXCALIDASH_BASE_URL": "${EXCALIDASH_BASE_URL}",
+      "EXCALIDASH_CF_ACCESS_CLIENT_ID": "${EXCALIDASH_CF_ACCESS_CLIENT_ID}",
+      "EXCALIDASH_CF_ACCESS_CLIENT_SECRET": "${EXCALIDASH_CF_ACCESS_CLIENT_SECRET}"
+    }
+  },
+  "agent-plan-review": {
+    "type": "stdio",
+    "command": "node",
+    "args": [
+      "/Users/pavlopetricenko/Documents/personal/agent-plan-review/bin/agent-plan-review.js",
+      "mcp"
+    ],
+    "env": {}
+  },
+  "conveyor": {
+    "type": "stdio",
+    "command": "/Users/pavlopetricenko/.local/bin/conveyor",
+    "args": [
+      "mcp"
+    ],
+    "env": {}
+  }
+}

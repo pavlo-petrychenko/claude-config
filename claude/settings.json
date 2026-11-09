@@ -1,0 +1,264 @@
+{
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1",
+    "CTO_REVIEW_GATE": "off",
+    "CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS": "64"
+  },
+  "permissions": {
+    "allow": [],
+    "defaultMode": "bypassPermissions"
+  },
+  "hooks": {
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/pavlopetricenko/.local/bin/conveyor hook Notification"
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/pavlopetricenko/.local/bin/conveyor hook PermissionRequest"
+          }
+        ]
+      }
+    ],
+    "PostCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/pavlopetricenko/.bun/bin/bun /Users/pavlopetricenko/Documents/personal/cc-memory/dist/memory.js hook compact-checkpoint",
+            "timeout": 15
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "ExitPlanMode",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node /Users/pavlopetricenko/.claude/hooks/herdr-status.mjs plan-review start; AGENT_PLAN_REVIEW_TIMEOUT=10800 node /Users/pavlopetricenko/Documents/personal/agent-plan-review/bin/agent-plan-review.js hook-exit-plan-mode; rc=$?; node /Users/pavlopetricenko/.claude/hooks/herdr-status.mjs plan-review end; exit $rc",
+            "timeout": 10800
+          }
+        ]
+      },
+      {
+        "matcher": "EnterPlanMode",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node /Users/pavlopetricenko/Documents/personal/agent-plan-review/bin/agent-plan-review.js enter-plan-mode",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "AskUserQuestion",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node /Users/pavlopetricenko/.claude/hooks/herdr-status.mjs hook PreToolUse",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "matcher": "mcp__agent-plan-review__plan_review_check",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node /Users/pavlopetricenko/.claude/hooks/herdr-status.mjs hook PreToolUse",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "mcp__agent-plan-review__plan_review_check",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node /Users/pavlopetricenko/.claude/hooks/herdr-status.mjs hook PostToolUse",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "matcher": "mcp__agent-plan-review__plan_review_check",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node /Users/pavlopetricenko/.claude/hooks/herdr-status.mjs hook PostToolUseFailure",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node /Users/pavlopetricenko/.claude/hooks/herdr-status.mjs hook SessionEnd",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/pavlopetricenko/.bun/bin/bun /Users/pavlopetricenko/Documents/personal/cc-memory/dist/memory.js hook worklog-floor",
+            "timeout": 15
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/pavlopetricenko/.local/bin/conveyor hook SessionEnd"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node /Users/pavlopetricenko/.claude/hooks/herdr-status.mjs hook SessionStart",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "npx buddy-reroll --apply-hook"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/pavlopetricenko/.bun/bin/bun /Users/pavlopetricenko/Documents/personal/cc-memory/dist/memory.js hook session-start",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/pavlopetricenko/.local/bin/conveyor hook SessionStart"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node /Users/pavlopetricenko/Documents/personal/agent-plan-review/bin/agent-plan-review.js stop-gate",
+            "timeout": 10
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/pavlopetricenko/.bun/bin/bun /Users/pavlopetricenko/Documents/personal/cc-memory/dist/memory.js hook wrap-gate",
+            "timeout": 15
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/pavlopetricenko/.local/bin/conveyor hook Stop"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node /Users/pavlopetricenko/.claude/hooks/herdr-status.mjs hook Stop",
+            "timeout": 10
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/pavlopetricenko/.bun/bin/bun /Users/pavlopetricenko/Documents/personal/cc-memory/dist/memory.js hook memory-inject",
+            "timeout": 15
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/pavlopetricenko/.local/bin/conveyor hook UserPromptSubmit"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node /Users/pavlopetricenko/.claude/hooks/herdr-status.mjs hook UserPromptSubmit",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline-herdr.sh"
+  },
+  "enabledPlugins": {
+    "slack@claude-plugins-official": true
+  },
+  "effortLevel": "high",
+  "modelSettings": {
+    "claude-fable-5-1": {
+      "effortLevel": "high"
+    },
+    "claude-opus-5-5": {
+      "effortLevel": "medium"
+    }
+  },
+  "autoCompactWindow": 500000,
+  "tui": "fullscreen",
+  "autoMemoryEnabled": true,
+  "skipDangerousModePermissionPrompt": true,
+  "skipWorkflowUsageWarning": true,
+  "switchModelsOnFlag": false,
+  "teammateMode": "tmux",
+  "agentPushNotifEnabled": true,
+  "voiceEnabled": true
+}
